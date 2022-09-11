@@ -1,10 +1,25 @@
-import { Server } from 'socket.io';
+// import { Server } from 'socket.io';
 
-const io = new Server(9000, {
-    cors: {
-        origin: 'http://localhost:3000',
-    }, 
-})
+// const io = new Server(9000, {
+//     cors: {
+//         origin: "*",
+//     }, 
+// })
+
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+const httpServer = createServer();
+const io = new Server(httpServer, {
+  cors: {
+    origin:'*',
+    // or with an array of origins
+    // origin: ["https://my-frontend.com", "https://my-other-frontend.com", "http://localhost:3000"],
+    credentials: true
+  }
+});
+
+
 
 
 let users = [];
